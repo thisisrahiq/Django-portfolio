@@ -1083,6 +1083,7 @@
   <a href="#experience" onclick="closeMobileNav()">Experience</a>
   <a href="#projects" onclick="closeMobileNav()">Projects</a>
   <a href="#education" onclick="closeMobileNav()">Education</a>
+  <a href="{% static 'docs/Rahiq_CV.pdf' %}" target="_blank" rel="noopener" onclick="closeMobileNav()">Resume</a>
   <button class="theme-toggle-btn theme-toggle-mobile" title="Toggle Theme" aria-label="Toggle Theme" style="margin-top:0.5rem;background:rgba(139,92,246,0.1);color:var(--purple);font-size:1.2rem;padding:0.6rem;border-radius:8px;width:100%;font-weight:600;">☀️ Toggle Theme</button>
   <a href="#contact" onclick="closeMobileNav()" style="background:var(--purple);color:#fff;text-align:center;margin-top:0.5rem;">Contact</a>
 </nav>
@@ -1096,6 +1097,7 @@
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#education">Education</a>
+    <a href="{% static 'docs/Rahiq_CV.pdf' %}" target="_blank" rel="noopener" style="border:1px solid var(--border);border-radius:4px;">Resume</a>
     <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">☀️</button>
     <a href="#contact" class="nav-cta">Contact</a>
   </div>
@@ -1114,10 +1116,10 @@
         Available for freelance
       </div>
       <h1 class="hero-title" style="font-size: clamp(3.5rem, 8vw, 6.5rem);">
-        {{ name }}
+        <span class="gradient-text">{{ name }}</span>
       </h1>
       <h2 class="hero-typing">
-        I am a <span class="gradient-text typed-text"></span><span class="cursor">&nbsp;</span>
+        <span class="gradient-text typed-text"></span><span class="cursor">&nbsp;</span>
       </h2>
       <p class="hero-sub">
         I build fast, scalable web applications from frontend to backend. Based in Chattogram, and have worked across 3 countries.
@@ -1127,7 +1129,6 @@
           Get in touch
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </a>
-        <a href="{% static 'docs/Rahiq_CV.pdf' %}" target="_blank" class="btn-outline" rel="noopener">Resume</a>
         <a href="#projects" class="btn-outline" style="border:none;background:rgba(255,255,255,0.03)" id="hero-projects-btn">View my work →</a>
       </div>
       <div class="hero-socials">
