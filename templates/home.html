@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ name }} — Full Stack Developer</title>
   <meta name="description" content="{{ name }} is a Full Stack Developer based in Chattogram, Bangladesh. Specializing in React, Node.js, Python, and Django." />
-  <link rel="icon" type="image/jpeg" href="{% static 'images/file3.jpg' %}" />
+  <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -211,6 +211,23 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
+    .hero-typing {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2rem;
+    }
+    .hero-typing .cursor {
+      display: inline-block;
+      width: 4px;
+      margin-left: 0.2rem;
+      background-color: var(--purple-lt);
+      animation: blink 1s infinite;
+    }
+    .hero-typing .cursor.typing { animation: none; }
+    @keyframes blink { 0% { background-color: var(--purple-lt); } 49% { background-color: var(--purple-lt); } 50% { background-color: transparent; } 99% { background-color: transparent; } }
+    
     .hero-sub {
       font-size: 1.05rem;
       color: var(--muted);
@@ -1096,18 +1113,22 @@
         <span class="hero-pulse"></span>
         Available for freelance
       </div>
-      <h1 class="hero-title">
-        Full Stack<br><span class="gradient-text">Developer</span>
+      <h1 class="hero-title" style="font-size: clamp(3.5rem, 8vw, 6.5rem);">
+        {{ name }}
       </h1>
+      <h2 class="hero-typing">
+        I am a <span class="gradient-text typed-text"></span><span class="cursor">&nbsp;</span>
+      </h2>
       <p class="hero-sub">
-        Hi, I'm <strong style="color:var(--white);">{{ name }}</strong>. I build fast, scalable web applications from frontend to backend — React, Node.js, Django &amp; more. Based in Chattogram, worked across 3 countries.
+        I build fast, scalable web applications from frontend to backend. Based in Chattogram, and have worked across 3 countries.
       </p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary" id="hero-cta-btn">
           Get in touch
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 7h10M8 3l4 4-4 4"/></svg>
         </a>
-        <a href="#projects" class="btn-outline" id="hero-projects-btn">View my work →</a>
+        <a href="{% static 'docs/Rahiq_CV.pdf' %}" target="_blank" class="btn-outline" rel="noopener">Resume</a>
+        <a href="#projects" class="btn-outline" style="border:none;background:rgba(255,255,255,0.03)" id="hero-projects-btn">View my work →</a>
       </div>
       <div class="hero-socials">
         <a href="{{ linkedin }}" target="_blank" class="social-icon" aria-label="LinkedIn" id="hero-linkedin">LI</a>
@@ -1453,6 +1474,46 @@
 </footer>
 
 <script>
+  // ── Typing Animation ─────────────────────────────────────
+  const typedTextSpan = document.querySelector(".typed-text");
+  const cursorSpan = document.querySelector(".cursor");
+  const textArray = ["Software Engineer", "Full Stack Developer", "MERN Stack Expert", "Django Expert"];
+  const typingDelay = 80;
+  const erasingDelay = 40;
+  const newTextDelay = 1500;
+  let textArrayIndex = 0;
+  let charIndex = 0;
+
+  function type() {
+    if (charIndex < textArray[textArrayIndex].length) {
+      if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+      typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(type, typingDelay);
+    } else {
+      cursorSpan.classList.remove("typing");
+      setTimeout(erase, newTextDelay);
+    }
+  }
+
+  function erase() {
+    if (charIndex > 0) {
+      if(!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+      typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex-1);
+      charIndex--;
+      setTimeout(erase, erasingDelay);
+    } else {
+      cursorSpan.classList.remove("typing");
+      textArrayIndex++;
+      if(textArrayIndex >= textArray.length) textArrayIndex = 0;
+      setTimeout(type, typingDelay + 500);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    if(textArray.length) setTimeout(type, newTextDelay + 250);
+  });
+
   // ── Theme Switcher ───────────────────────────────────────
   const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
   
