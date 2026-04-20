@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1038,7 +1039,7 @@
     <!-- Right: image -->
     <div class="hero-image-wrap">
       <div class="hero-image-ring" id="hero-image-ring">
-        <img src="/media/file3.jpg" alt="{{ name }} — {{ title }}" />
+        <img src="{% static 'images/file3.jpg' %}" alt="{{ name }} — {{ title }}" />
       </div>
       <div class="float-card float-card-1">
         <div class="float-card-label">Experience</div>
