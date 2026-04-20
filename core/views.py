@@ -1,9 +1,10 @@
+import os
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import ContactMessage
 
-# ── Admin credentials (change in production) ──────────────────
-ADMIN_PASSWORD = 'portfolio2025'
+# ── Admin credentials (set 'ADMIN_PASSWORD' in Railway variables) ──
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'portfolio2025')
 
 
 def home(request):
