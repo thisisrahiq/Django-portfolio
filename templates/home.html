@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ name }} — Full Stack Developer</title>
   <meta name="description" content="{{ name }} is a Full Stack Developer based in Chattogram, Bangladesh. Specializing in React, Node.js, Python, and Django." />
+  <link rel="icon" type="image/jpeg" href="{% static 'images/file3.jpg' %}" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -24,6 +25,19 @@
       --muted:     #64748b;
       --muted2:    #334155;
       --white:     #ffffff;
+    }
+    :root.light-mode {
+      --bg:        #f3f4f6;
+      --bg2:       #ffffff;
+      --surface:   rgba(0,0,0,0.03);
+      --border:    rgba(0,0,0,0.08);
+      --border-glow: rgba(139,92,246,0.3);
+      --purple:    #7c3aed;
+      --purple-lt: #8b5cf6;
+      --text:      #0f172a;
+      --muted:     #475569;
+      --muted2:    #64748b;
+      --white:     #000000;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -88,12 +102,14 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
+    :root.light-mode nav { background: rgba(255,255,255,0.8); }
     .nav-logo {
       font-family: 'Syne', sans-serif;
       font-weight: 800;
       font-size: 1.3rem;
       color: var(--white);
       letter-spacing: -0.02em;
+      text-decoration: none;
     }
     .nav-logo span { color: var(--purple); }
     .nav-links {
@@ -113,6 +129,20 @@
       transition: color 0.2s, background 0.2s;
     }
     .nav-links a:hover { color: var(--purple-lt); background: rgba(139,92,246,0.08); }
+    .theme-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0.4rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s, background 0.2s;
+    }
+    .theme-toggle-btn:hover { color: var(--purple); background: rgba(139,92,246,0.1); }
     .nav-cta {
       background: var(--purple) !important;
       color: var(--white) !important;
@@ -1024,18 +1054,20 @@
   <a href="#experience" onclick="closeMobileNav()">Experience</a>
   <a href="#projects" onclick="closeMobileNav()">Projects</a>
   <a href="#education" onclick="closeMobileNav()">Education</a>
+  <button class="theme-toggle-btn theme-toggle-mobile" title="Toggle Theme" aria-label="Toggle Theme" style="margin-top:1rem;background:rgba(139,92,246,0.1);color:var(--purple);font-size:1.5rem;padding:0.75rem;border-radius:12px;width:100%;">☀️</button>
   <a href="#contact" onclick="closeMobileNav()">Contact</a>
 </nav>
 
 <!-- ── Navbar ──────────────────────────────────────────────── -->
 <nav>
-  <span class="nav-logo">RAM<span>.</span></span>
+  <a href="#top" class="nav-logo">RAM<span>.</span></a>
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#experience">Experience</a>
     <a href="#projects">Projects</a>
     <a href="#education">Education</a>
+    <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">☀️</button>
     <a href="#contact" class="nav-cta">Contact</a>
   </div>
   <button class="hamburger" id="hamburger" onclick="openMobileNav()" aria-label="Open menu">
@@ -1409,6 +1441,24 @@
 </footer>
 
 <script>
+  // ── Theme Switcher ───────────────────────────────────────
+  const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+  
+  if (localStorage.getItem('theme') === 'light') {
+    document.documentElement.classList.add('light-mode');
+    themeToggleBtns.forEach(btn => btn.textContent = '🌙');
+  }
+  
+  themeToggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('light-mode');
+      const isLight = document.documentElement.classList.contains('light-mode');
+      
+      themeToggleBtns.forEach(b => b.textContent = isLight ? '🌙' : '☀️');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+  });
+
   // ── Scroll reveal ────────────────────────────────────────
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
