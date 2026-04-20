@@ -136,6 +136,36 @@ def contact(request):
                 subject=subject,
                 message=message_text,
             )
+
+            # --- Discord Notification ---
+            discord_webhook_url = os.environ.get('DISCORD_WEBHOOK_URL')
+            if discord_webhook_url:
+                import json
+                import urllib.request
+                
+                payload = {
+                    "content": "🚨 **New Portfolio Message!**",
+                    "embeds": [{
+                        "title": subject if subject else "No Subject",
+                        "color": 9133814,  # Purple
+                        "fields": [
+                            {"name": "Name", "value": name, "inline": True},
+                            {"name": "Email", "value": email, "inline": True},
+                            {"name": "Message", "value": message_text}
+                        ]
+                    }]
+                }
+                
+                req = urllib.request.Request(
+                    discord_webhook_url,
+                    data=json.dumps(payload).encode('utf-8'),
+                    headers={'Content-Type': 'application/json', 'User-Agent': 'PortfolioBot/1.0'}
+                )
+                try:
+                    urllib.request.urlopen(req, timeout=4)
+                except Exception as e:
+                    print(f"Discord notice failed: {e}")
+            # ----------------------------
             messages.success(request, f"Thanks {name}! Your message has been received. I'll get back to you within 24 hours.")
         else:
             messages.error(request, "Please fill in all required fields (Name, Email, Message).")
