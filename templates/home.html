@@ -159,6 +159,11 @@
       align-items: center;
       gap: 0.25rem;
     }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
     .nav-links a {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
@@ -1137,26 +1142,30 @@
   <a href="#projects" onclick="closeMobileNav()">Projects</a>
   <a href="#education" onclick="closeMobileNav()">Education</a>
   <a href="{% static 'docs/Rahiq_CV.pdf' %}" target="_blank" rel="noopener" onclick="closeMobileNav()">Resume</a>
-  <button class="theme-toggle-btn theme-toggle-mobile" title="Toggle Theme" aria-label="Toggle Theme" style="margin-top:0.5rem;background:rgba(139,92,246,0.1);color:var(--purple);font-size:1.2rem;padding:0.6rem;border-radius:8px;width:100%;font-weight:600;">☀️ Toggle Theme</button>
   <a href="#contact" onclick="closeMobileNav()" style="background:var(--purple);color:#fff;text-align:center;margin-top:0.5rem;">Contact</a>
 </nav>
 
 <!-- ── Navbar ──────────────────────────────────────────────── -->
 <nav>
   <a href="#top" class="nav-logo">RAM<span>.</span></a>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#education">Education</a>
-    <a href="{% static 'docs/Rahiq_CV.pdf' %}" target="_blank" rel="noopener" style="border:1px solid var(--border);border-radius:4px;">Resume</a>
+  
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="{% static 'docs/Rahiq_CV.pdf' %}" target="_blank" rel="noopener" style="border:1px solid var(--border);border-radius:4px;">Resume</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+    
     <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">☀️</button>
-    <a href="#contact" class="nav-cta">Contact</a>
+    
+    <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <!-- ── Hero ────────────────────────────────────────────────── -->
