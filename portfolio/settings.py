@@ -12,6 +12,8 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 # ── CSRF (Railway domain) ──────────────────────────────────────
 CSRF_TRUSTED_ORIGINS = [
     'https://*.up.railway.app',
+    'https://rahiq.dev',
+    'https://www.rahiq.dev',
     'http://localhost:8000',
     'http://127.0.0.1:8000',
 ]
