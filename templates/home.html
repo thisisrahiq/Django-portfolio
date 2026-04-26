@@ -666,7 +666,7 @@
     .projects-section { background: var(--bg2); }
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
     .project-card {
@@ -1015,12 +1015,23 @@
       .nav-links { display: none; }
       .hamburger { display: flex; }
       .form-row { grid-template-columns: 1fr; }
+      .scroll-indicator { display: none; } /* Hide scroll indicator on tablets/mobile to avoid overlap */
     }
     @media (max-width: 600px) {
-      .section { padding: 4rem 1.25rem; }
-      nav { padding: 1rem 1.25rem; }
+      .section { padding: 4rem 1.5rem; }
+      .section-heading { font-size: clamp(1.8rem, 8vw, 2.4rem); margin-bottom: 2.5rem; }
+      nav { padding: 1rem 1.5rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-      .hero-title { font-size: clamp(2.5rem, 11vw, 3rem); }
+      .hero-title { font-size: clamp(2.2rem, 10vw, 2.8rem); line-height: 1.2; margin-bottom: 1.25rem; }
+      .hero-typing { font-size: 1.4rem; margin-bottom: 1.5rem; }
+      .hero-sub { font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.7; }
+      .hero-actions { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; gap: 0.8rem; }
+      .btn-primary, .btn-outline { width: 100%; justify-content: center; padding: 0.9rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+      .project-card { padding: 1.5rem; }
+      .marquee-wrapper::before, .marquee-wrapper::after { width: 40px; } /* Shrink fade edges on small screens */
+      .marquee-track { gap: 0.75rem; }
+      .skill-pill { padding: 0.5rem 1rem; }
     }
 
     /* Mobile nav popup */
