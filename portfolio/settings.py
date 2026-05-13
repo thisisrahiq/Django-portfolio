@@ -9,9 +9,15 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-portfolio-dev-key-cha
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
-# ── CSRF (Railway domain) ──────────────────────────────────────
+# Add Render's auto-assigned domain
+render_hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if render_hostname:
+    ALLOWED_HOSTS.append(render_hostname)
+
+# ── CSRF ───────────────────────────────────────────────────────
 CSRF_TRUSTED_ORIGINS = [
     'https://*.up.railway.app',
+    'https://*.onrender.com',
     'https://rahiq.dev',
     'https://www.rahiq.dev',
     'http://localhost:8000',
@@ -20,6 +26,8 @@ CSRF_TRUSTED_ORIGINS = [
 railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN')
 if railway_domain:
     CSRF_TRUSTED_ORIGINS.append(f'https://{railway_domain}')
+if render_hostname:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{render_hostname}')
 
 # ── Apps ───────────────────────────────────────────────────────
 INSTALLED_APPS = [
