@@ -31,6 +31,9 @@ if render_hostname:
 
 # ── Apps ───────────────────────────────────────────────────────
 INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
     'django.contrib.staticfiles',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -43,6 +46,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',   # serve static files in prod
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 ]
 
