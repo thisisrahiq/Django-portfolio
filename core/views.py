@@ -166,6 +166,31 @@ def contact(request):
                 except Exception as e:
                     print(f"Discord notice failed: {e}")
             # ----------------------------
+
+            # --- WhatsApp Notification (CallMeBot) ---
+            wa_phone  = os.environ.get('WHATSAPP_PHONE')
+            wa_apikey = os.environ.get('WHATSAPP_APIKEY')
+            if wa_phone and wa_apikey:
+                import urllib.parse
+                import urllib.request
+                wa_text = (
+                    f"📬 New Portfolio Message!\n"
+                    f"👤 Name: {name}\n"
+                    f"📧 Email: {email}\n"
+                    f"📝 Subject: {subject or 'No subject'}\n"
+                    f"💬 Message: {message_text[:200]}"
+                )
+                encoded_text = urllib.parse.quote(wa_text)
+                wa_url = (
+                    f"https://api.callmebot.com/whatsapp.php"
+                    f"?phone={wa_phone}&text={encoded_text}&apikey={wa_apikey}"
+                )
+                try:
+                    urllib.request.urlopen(wa_url, timeout=5)
+                except Exception as e:
+                    print(f"WhatsApp notice failed: {e}")
+            # -----------------------------------------
+
             messages.success(request, f"Thanks {name}! Your message has been received. I'll get back to you within 24 hours.")
         else:
             messages.error(request, "Please fill in all required fields (Name, Email, Message).")
